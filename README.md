@@ -81,7 +81,85 @@ make kill
 a.	Batch predictions through Prefect with the batch_prediction flow.   
      -	The project will simulate 100 records by sampling values from the training dataset if you do not supply the S3 URI of the data.     
      -	As an alternative, you can supply a file path for the prediction; however, the file path format must to match that of the training data.
+![image](https://github.com/user-attachments/assets/238b63b2-4e31-4747-a301-d0c033f47ed3)
 
+ii. Streaming prediction through the Flask API:
+- Send a JSON to the /predict endpoint (default http://127.0.0.1:5010/predict).
+- The JSON schema should be as follows:
 
+  {
 
+	    "house_age": 1.1,
+     
+	    "distance_to_the_nearest_MRT_station": 193.5845,
+     
+	    "number_of_convenience_stores": 6,
+     
+	    "latitude": 24.96571,
+     
+	    "longitude": 121.54089
+  }
+  
+-	If the model is trained and set up in MLFlow, then the response should look like:
+
+{  
+    "input_data": {   
+    
+        "distance_to_the_nearest_MRT_station": 193.5845,
+  
+        "house_age": 1.1,
+  
+        "latitude": 24.96571,
+  
+        "longitude": 121.54089,
+  
+        "number_of_convenience_stores": 6
+  
+    },
+  
+    "model_metadata": {
+  
+        "model_uuid": "883223d6c1094fb4b3386de4f83bf2f1",
+  
+        "run_id": "d4abb3c43570477491e4a678cb9f5f62"
+  
+    },
+  
+    "prediction": 47.801833910533915
+  
+}
+-	If the project doesn't have a trained model, the API will respond with:
+  
+    {
+    "error": "Model not trained yet, please train a model within prefect UI or calling /trigger-training endpoint"
+    }
+ 	
+iii. Batch prediction through the Flask API, this endpoint will trigger the batch_prediction flow on prefect:
+- Send a JSON to the /trigger-batch-prediction endpoint (default http://127.0.0.1:5010/trigger-batch-prediction).
+- The JSON schema should be as follows:
+  
+     {
+  	    "s3_file_path": "s3://some_bucket/some_file.csv"
+     }
+-	If you sent a logic false in the s3_file_path key, the project will simulate 100 records by sampling values from the training dataset.
+  
+     {
+   "s3_file_path": false
+     }
+-	The response should look like:
+  
+     {
+    "flow_run_id": "064e3d95-4b5e-4ef4-9461-f9a131046af1",
+    "flow_run_name": "magnificent-puffin"
+     }
+
+2.	The CSV file containing the input data and the predictions produced by the batch predictions will be saved in the s3://predictions bucket under the name predictions_{%Y%m%d_%H%M}.csv.
+   
+The current date and time in the format YYYYMMDD_HHMM will be dynamically replaced with the placeholder {%Y%m%d_%H%M} in the filename predictions_{%Y%m%d_%H%M}.csv. For instance, the filename predictions_20230727_1545.csv will be generated if the batch predictions are generated on July 27, 2023, at 3:45 PM. As a result, every batch forecast in the S3 bucket can have a distinct, timestamped filename.
+
+Additionally, a process summary will be produced as an artifact report by the batch_prediction flow:
+
+![image](https://github.com/user-attachments/assets/5a8ffa63-7dcc-4beb-89b3-fd286b7b51e2)
+
+### Visualizing the metrics:
 
