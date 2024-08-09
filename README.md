@@ -62,15 +62,15 @@ PostgreSQL	5432	127.0.0.1	http://127.0.0.1:5432 Postgres database
 9.	Alternative you can trigger the model_training flow on prefect through the /trigger-training endpoint (default http://127.0.0.1:5010/trigger-training).
 -	The JSON schema should be as follows:
   
-{
+        {
 	    "s3_file_path": "s3://some_bucket/train_data.csv"
-}
+        }
 
 -	If you sent a logic false in the s3_file_path key, model will be trained with the default training data.
 
-{
-    "s3_file_path": false
-}
+        {
+        "s3_file_path": false
+        }
 
 10.	-Optional- Run the following command, to exit the project:
 make kill
