@@ -30,3 +30,27 @@ The goal variable (Y) will be the value to predict for fresh, unforeseen data po
 ### Project Diagram
 ![image](https://github.com/user-attachments/assets/e5f8949e-9cd6-4bc9-abe0-dca66c09f921)
 
+### How to set up the project
+
+1.	Clone the project repository:
+git clone https://github.com/sebastiancontz/ml-ops-zoomcamp-project.git
+2.	Install docker-compose version 3.
+3.	Go to the project directory:
+cd ml-ops-zoomcamp-project/
+4.	Build the project with the Makefile:
+make build
+5.	The process of building will automatically run the unit tests. If all the tests pass, the project will be ready to run. However, if the tests fail, the project will not be built.
+6.	Once the image is built and the service is up, the following services will be available:
+service	port	Interface	url	description
+API	5010	127.0.0.1	http://127.0.0.1:5010
+API prediction service
+Prefect	4200	127.0.0.1	http://127.0.0.1:4200
+Prefect UI
+MLFlow	5000	127.0.0.1	http://127.0.0.1:5000
+MLFlow UI
+Grafana	3000	127.0.0.1	http://127.0.0.1:3000
+Grafana UI
+PostgreSQL	5432	127.0.0.1	http://127.0.0.1:5432
+Postgres database
+7.	Access Prefect Deployments and run the model_training flow with Quick run.
+
