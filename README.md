@@ -75,5 +75,13 @@ PostgreSQL	5432	127.0.0.1	http://127.0.0.1:5432 Postgres database
 10.	-Optional- Run the following command, to exit the project:
 make kill
 
+### Creating Predictions
+1.	Following model training, there are three methods by which you can start making predictions:
+   
+a.	Batch predictions through Prefect with the batch_prediction flow.   
+     -	The project will simulate 100 records by sampling values from the training dataset if you do not supply the S3 URI of the data.     
+     -	As an alternative, you can supply a file path for the prediction; however, the file path format must to match that of the training data.
+
+
 
 
