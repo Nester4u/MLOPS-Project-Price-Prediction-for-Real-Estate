@@ -162,4 +162,20 @@ Additionally, a process summary will be produced as an artifact report by the ba
 ![image](https://github.com/user-attachments/assets/5a8ffa63-7dcc-4beb-89b3-fd286b7b51e2)
 
 ### Visualizing the metrics:
+#### 
+Utilizing Evidently reports, the project involves calculating training and batch prediction metrics. These metrics can be seen in Grafana and are kept in a PostgreSQL database. Take these actions to gain access to the metrics and visualizations:
+1.	Access to Grafana UI using your web browser.
+2.	Use the default credentials to log in:
+-	Username: admin
+-	Password: admin
+####
+3. There are two dashboards available on the dashboard section: 	
+-  Training metrics: The metrics pertaining to the training procedure on the validation dataset are shown in this dashboard
+-  Batch metrics: The metrics pertaining to the batch prediction process are displayed on this dashboard
+####
+4. The dashboards should looks like the following images:
+-  Training metrics dashboard
+![image](https://github.com/user-attachments/assets/d1e31113-25bb-4fd2-a491-4464ae8f1685)
+-       Batch metrics dashboard
+![image](https://github.com/user-attachments/assets/65844121-7c89-47fd-bd36-516cc6236727)
 
