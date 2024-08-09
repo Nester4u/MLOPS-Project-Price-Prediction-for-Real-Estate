@@ -179,3 +179,20 @@ Utilizing Evidently reports, the project involves calculating training and batch
 -       Batch metrics dashboard
 ![image](https://github.com/user-attachments/assets/65844121-7c89-47fd-bd36-516cc6236727)
 
+### Test Information
+####
+Unit and integration tests for the real_estate_model package are included in the project. When the project is constructed using the tests service specified in the docker-compose.yml file, these tests are run automatically. The building procedure will come to an end if any of the tests are unsuccessful.
+
+For the unit tests:
+- From the batch_prediction flow, the tasks generate_prediction and upload_prediction_to_s3 are tested.
+- Additionally tested are the auxiliary functions from the real_estate_model.utils module: process_csv, validate_headers, and get_prefect_flow_id.
+
+For the integration tests:
+- The tests include a variety of circumstances, including those in which the ML model has not been trained, missing parameters, and valid input data. The code simulates model loading and running by using mock implementations of the MLflow functions. In order to test the batch prediction capability with both valid and invalid S3 file paths, it also mocks Prefect flows and API queries.
+- The tests are designed to guarantee the system's overall operation and dependability as well as the integration of the API, MLflow, and Prefect components.
+
+To run the tests manually;
+
+pipenv install --dev
+
+pipenv run pytest
